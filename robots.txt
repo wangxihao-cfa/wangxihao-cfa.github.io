@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wangxihao-cfa.github.io/sitemap.xml
