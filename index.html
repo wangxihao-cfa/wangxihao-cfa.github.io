@@ -932,7 +932,7 @@
         <span class="t" data-i18n="ct_li">LinkedIn</span>
         <span class="v">linkedin.com/in/xihao-wang</span>
       </a>
-      <a class="c-card" href="Resume/Xihao%20Wang-Resume%202608.pdf" id="resumeLink" download onclick="return forceDownload(event, this)">
+      <a class="c-card" href="https://raw.githubusercontent.com/wangxihao-cfa/wangxihao-cfa.github.io/main/Resume/Xihao%20Wang-Resume%202608.pdf" id="resumeLink" download>
         <span class="t" data-i18n="ct_resume">Resume</span>
         <span class="v" data-i18n="ct_resume_pdf">Download résumé (PDF)</span>
       </a>
@@ -959,34 +959,6 @@
 <button class="top-btn" id="topBtn" aria-label="Back to top">↑</button>
 
 <script>
-  // Force-download any file via fetch + blob. Falls back gracefully if anything fails.
-  // Returns true to allow the native download attribute to take over as a second safety net.
-  async function forceDownload(e, el) {
-    if (e) e.preventDefault();
-    const url = (el && el.href) || '';
-    const fname = (el && el.getAttribute('download')) || decodeURIComponent(url.split('/').pop() || 'download.pdf');
-    try {
-      const r = await fetch(url, { cache: 'no-store' });
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      const blob = await r.blob();
-      if (blob.size < 100) throw new Error('Empty blob');
-      const objUrl = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = objUrl;
-      a.download = fname;
-      a.rel = 'noopener';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      setTimeout(() => URL.revokeObjectURL(objUrl), 1000);
-      return false;
-    } catch (err) {
-      console.warn('[resume] forceDownload failed, falling back to native:', err);
-      // Let the browser handle the link natively (download attribute will trigger a save dialog)
-      return true;
-    }
-  }
-
   const I18N = {
     en: {
       nav_name: "Xihao Wang, CFA, FRM, CQF", nav_about: "About", nav_work: "Work", nav_exp: "Experience", nav_skills: "Skills", nav_cta: "Get in touch",
@@ -1123,8 +1095,8 @@
     });
     const rl = document.getElementById('resumeLink');
     if (rl) rl.href = lang === 'zh'
-      ? 'Resume/' + encodeURIComponent('王希昊-简历 202608.pdf')
-      : 'Resume/Xihao%20Wang-Resume%202608.pdf';
+      ? 'https://raw.githubusercontent.com/wangxihao-cfa/wangxihao-cfa.github.io/main/Resume/' + encodeURIComponent('王希昊-简历 202608.pdf')
+      : 'https://raw.githubusercontent.com/wangxihao-cfa/wangxihao-cfa.github.io/main/Resume/Xihao%20Wang-Resume%202608.pdf';
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
     try { localStorage.setItem('lang', lang); } catch (e) {}
   }
