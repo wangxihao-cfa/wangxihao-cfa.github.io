@@ -932,7 +932,7 @@
         <span class="t" data-i18n="ct_li">LinkedIn</span>
         <span class="v">linkedin.com/in/xihao-wang</span>
       </a>
-      <a class="c-card" href="Resume/Xihao%20Wang-Resume%202608.pdf" id="resumeLink" onclick="forceDownload(event, this.href)">
+      <a class="c-card" href="Resume/Xihao%20Wang-Resume%202608.pdf" id="resumeLink" download onclick="return forceDownload(event, this)">
         <span class="t" data-i18n="ct_resume">Resume</span>
         <span class="v" data-i18n="ct_resume_pdf">Download résumé (PDF)</span>
       </a>
@@ -959,23 +959,31 @@
 <button class="top-btn" id="topBtn" aria-label="Back to top">↑</button>
 
 <script>
-  // Force-download any file URL via fetch + blob (works around browser PDF viewer interception)
-  async function forceDownload(e, url) {
-    e.preventDefault();
+  // Force-download any file via fetch + blob. Falls back gracefully if anything fails.
+  // Returns true to allow the native download attribute to take over as a second safety net.
+  async function forceDownload(e, el) {
+    if (e) e.preventDefault();
+    const url = (el && el.href) || '';
+    const fname = (el && el.getAttribute('download')) || decodeURIComponent(url.split('/').pop() || 'download.pdf');
     try {
-      const r = await fetch(url);
+      const r = await fetch(url, { cache: 'no-store' });
       if (!r.ok) throw new Error('HTTP ' + r.status);
       const blob = await r.blob();
-      const fname = decodeURIComponent(url.split('/').pop());
+      if (blob.size < 100) throw new Error('Empty blob');
+      const objUrl = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
+      a.href = objUrl;
       a.download = fname;
+      a.rel = 'noopener';
       document.body.appendChild(a);
       a.click();
       a.remove();
-      setTimeout(() => URL.revokeObjectURL(a.href), 0);
+      setTimeout(() => URL.revokeObjectURL(objUrl), 1000);
+      return false;
     } catch (err) {
-      window.location.href = url;
+      console.warn('[resume] forceDownload failed, falling back to native:', err);
+      // Let the browser handle the link natively (download attribute will trigger a save dialog)
+      return true;
     }
   }
 
