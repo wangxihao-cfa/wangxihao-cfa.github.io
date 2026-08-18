@@ -932,9 +932,9 @@
         <span class="t" data-i18n="ct_li">LinkedIn</span>
         <span class="v">linkedin.com/in/xihao-wang</span>
       </a>
-      <a class="c-card" href="Resume/Xihao%20Wang-Resume%202608.pdf" id="resumeLink" download>
+      <a class="c-card" href="Resume/Xihao%20Wang-Resume%202608.pdf" id="resumeLink" onclick="forceDownload(event, this.href)">
         <span class="t" data-i18n="ct_resume">Resume</span>
-        <span class="v" data-i18n="ct_resume_d">Download résumé (PDF)</span>
+        <span class="v" data-i18n="ct_resume_pdf">Download résumé (PDF)</span>
       </a>
     </div>
   </div>
@@ -959,6 +959,26 @@
 <button class="top-btn" id="topBtn" aria-label="Back to top">↑</button>
 
 <script>
+  // Force-download any file URL via fetch + blob (works around browser PDF viewer interception)
+  async function forceDownload(e, url) {
+    e.preventDefault();
+    try {
+      const r = await fetch(url);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const blob = await r.blob();
+      const fname = decodeURIComponent(url.split('/').pop());
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = fname;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 0);
+    } catch (err) {
+      window.location.href = url;
+    }
+  }
+
   const I18N = {
     en: {
       nav_name: "Xihao Wang, CFA, FRM, CQF", nav_about: "About", nav_work: "Work", nav_exp: "Experience", nav_skills: "Skills", nav_cta: "Get in touch",
@@ -1019,7 +1039,7 @@
       sk4_t: "Platforms &amp; Tools", sk4_p: "Snowflake, Power BI, Tableau, Alteryx, FactSet, and relational databases — with BI integration for model outputs, dashboards, and executive reporting.",
       ct_eyebrow: "Contact", ct_h2: "Let's talk numbers.",
       ct_lead: "Hiring for quantitative strategy, financial AI, or private-markets analytics? I'm open to conversations — and I ship.",
-      ct_btn: "Start a conversation", ct_email: "Email", ct_li: "LinkedIn", ct_resume: "Resume", ct_resume_d: "Download résumé (PDF)",
+      ct_btn: "Start a conversation", ct_email: "Email", ct_li: "LinkedIn", ct_resume: "Resume", ct_resume_pdf: "Download résumé (PDF)",
       ft_cr: "© 2026 Xihao Wang, CFA, FRM, CQF · Dallas, TX"
     },
     zh: {
@@ -1081,7 +1101,7 @@
       sk4_t: "平台与工具", sk4_p: "Snowflake、Power BI、Tableau、Alteryx、FactSet 与关系数据库——BI 集成用于模型输出、仪表盘与高管报表。",
       ct_eyebrow: "联系", ct_h2: "来聊聊数字。",
       ct_lead: "在招聘量化策略、金融 AI 或私募市场分析人才？我很乐意聊聊——而且我能交付。",
-      ct_btn: "开始对话", ct_email: "邮箱", ct_li: "LinkedIn", ct_resume: "简历", ct_resume_d: "下载简历（PDF）",
+      ct_btn: "开始对话", ct_email: "邮箱", ct_li: "LinkedIn", ct_resume: "简历", ct_resume_pdf: "下载简历（PDF）",
       ft_cr: "© 2026 王希昊（Xihao Wang），CFA、FRM、CQF · 德州达拉斯"
     }
   };
