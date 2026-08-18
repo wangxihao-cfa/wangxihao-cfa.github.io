@@ -1098,10 +1098,14 @@
       ? 'Resume/' + encodeURIComponent('王希昊-简历 202608.pdf')
       : 'Resume/Xihao%20Wang-Resume%202608.pdf';
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    try { localStorage.setItem('lang', lang); } catch (e) {}
   }
 
   document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
-  applyLang('en');
+  // First visit -> English by default; afterwards remember the visitor's choice.
+  let saved = 'en';
+  try { saved = localStorage.getItem('lang') || 'en'; } catch (e) {}
+  applyLang(saved);
 
   // Nav border on scroll
   const nav = document.getElementById('nav');
