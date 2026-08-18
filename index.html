@@ -932,13 +932,13 @@
         <span class="t" data-i18n="ct_li">LinkedIn</span>
         <span class="v">linkedin.com/in/xihao-wang</span>
       </a>
-      <a class="c-card" href="Resume/Xihao%20Wang-Resume%202608.pdf" id="resumeLink" download>
+      <a class="c-card" href="Resume/Xihao%20Wang-Resume%20202608.pdf" id="resumeLink" download>
         <span class="t" data-i18n="ct_resume">Resume</span>
         <span class="v" data-i18n="ct_resume_pdf">Download résumé (PDF)</span>
       </a>
       <p class="resume-alt reveal d3" style="grid-column:1/-1;text-align:center;font-size:12.5px;color:var(--text-2);margin-top:-6px;">
         <span data-i18n="ct_resume_alt">Download not working?</span>
-        <a href="https://raw.githubusercontent.com/wangxihao-cfa/wangxihao-cfa.github.io/main/Resume/Xihao%20Wang-Resume%202608.pdf" id="resumeAltLink" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;margin-left:4px;" data-i18n="ct_resume_alt_link">Try GitHub direct link</a>
+        <a href="https://raw.githubusercontent.com/wangxihao-cfa/wangxihao-cfa.github.io/main/Resume/Xihao%20Wang-Resume%20202608.pdf" id="resumeAltLink" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;margin-left:4px;" data-i18n="ct_resume_alt_link">Try GitHub direct link</a>
       </p>
     </div>
   </div>
@@ -1100,9 +1100,9 @@
     const rl = document.getElementById('resumeLink');
     if (rl) rl.href = lang === 'zh'
       ? 'Resume/' + encodeURIComponent('王希昊-简历 202608.pdf')
-      : 'Resume/Xihao%20Wang-Resume%202608.pdf';
+      : 'Resume/Xihao%20Wang-Resume%20202608.pdf';
     const ralt = document.getElementById('resumeAltLink');
-    if (ralt) ralt.href = 'https://raw.githubusercontent.com/wangxihao-cfa/wangxihao-cfa.github.io/main/Resume/' + (lang === 'zh' ? encodeURIComponent('王希昊-简历 202608.pdf') : 'Xihao%20Wang-Resume%202608.pdf');
+    if (ralt) ralt.href = 'https://raw.githubusercontent.com/wangxihao-cfa/wangxihao-cfa.github.io/main/Resume/' + (lang === 'zh' ? encodeURIComponent('王希昊-简历 202608.pdf') : 'Xihao%20Wang-Resume%20202608.pdf');
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
     try { localStorage.setItem('lang', lang); } catch (e) {}
   }
