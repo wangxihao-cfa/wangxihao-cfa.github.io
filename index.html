@@ -932,10 +932,14 @@
         <span class="t" data-i18n="ct_li">LinkedIn</span>
         <span class="v">linkedin.com/in/xihao-wang</span>
       </a>
-      <a class="c-card" href="https://raw.githubusercontent.com/wangxihao-cfa/wangxihao-cfa.github.io/main/Resume/Xihao%20Wang-Resume%202608.pdf" id="resumeLink" download>
+      <a class="c-card" href="Resume/Xihao%20Wang-Resume%202608.pdf" id="resumeLink" download>
         <span class="t" data-i18n="ct_resume">Resume</span>
         <span class="v" data-i18n="ct_resume_pdf">Download résumé (PDF)</span>
       </a>
+      <p class="resume-alt reveal d3" style="grid-column:1/-1;text-align:center;font-size:12.5px;color:var(--text-2);margin-top:-6px;">
+        <span data-i18n="ct_resume_alt">Download not working?</span>
+        <a href="https://raw.githubusercontent.com/wangxihao-cfa/wangxihao-cfa.github.io/main/Resume/Xihao%20Wang-Resume%202608.pdf" id="resumeAltLink" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;margin-left:4px;" data-i18n="ct_resume_alt_link">Try GitHub direct link</a>
+      </p>
     </div>
   </div>
 </section>
@@ -1019,7 +1023,7 @@
       sk4_t: "Platforms &amp; Tools", sk4_p: "Snowflake, Power BI, Tableau, Alteryx, FactSet, and relational databases — with BI integration for model outputs, dashboards, and executive reporting.",
       ct_eyebrow: "Contact", ct_h2: "Let's talk numbers.",
       ct_lead: "Hiring for quantitative strategy, financial AI, or private-markets analytics? I'm open to conversations — and I ship.",
-      ct_btn: "Start a conversation", ct_email: "Email", ct_li: "LinkedIn", ct_resume: "Resume", ct_resume_pdf: "Download résumé (PDF)",
+      ct_btn: "Start a conversation", ct_email: "Email", ct_li: "LinkedIn", ct_resume: "Resume", ct_resume_pdf: "Download résumé (PDF)", ct_resume_alt: "Download not working?", ct_resume_alt_link: "Try GitHub direct link",
       ft_cr: "© 2026 Xihao Wang, CFA, FRM, CQF · Dallas, TX"
     },
     zh: {
@@ -1081,7 +1085,7 @@
       sk4_t: "平台与工具", sk4_p: "Snowflake、Power BI、Tableau、Alteryx、FactSet 与关系数据库——BI 集成用于模型输出、仪表盘与高管报表。",
       ct_eyebrow: "联系", ct_h2: "来聊聊数字。",
       ct_lead: "在招聘量化策略、金融 AI 或私募市场分析人才？我很乐意聊聊——而且我能交付。",
-      ct_btn: "开始对话", ct_email: "邮箱", ct_li: "LinkedIn", ct_resume: "简历", ct_resume_pdf: "下载简历（PDF）",
+      ct_btn: "开始对话", ct_email: "邮箱", ct_li: "LinkedIn", ct_resume: "简历", ct_resume_pdf: "下载简历（PDF）", ct_resume_alt: "下载不了？", ct_resume_alt_link: "用 GitHub 备用链接",
       ft_cr: "© 2026 王希昊（Xihao Wang），CFA、FRM、CQF · 德州达拉斯"
     }
   };
@@ -1095,8 +1099,10 @@
     });
     const rl = document.getElementById('resumeLink');
     if (rl) rl.href = lang === 'zh'
-      ? 'https://raw.githubusercontent.com/wangxihao-cfa/wangxihao-cfa.github.io/main/Resume/' + encodeURIComponent('王希昊-简历 202608.pdf')
-      : 'https://raw.githubusercontent.com/wangxihao-cfa/wangxihao-cfa.github.io/main/Resume/Xihao%20Wang-Resume%202608.pdf';
+      ? 'Resume/' + encodeURIComponent('王希昊-简历 202608.pdf')
+      : 'Resume/Xihao%20Wang-Resume%202608.pdf';
+    const ralt = document.getElementById('resumeAltLink');
+    if (ralt) ralt.href = 'https://raw.githubusercontent.com/wangxihao-cfa/wangxihao-cfa.github.io/main/Resume/' + (lang === 'zh' ? encodeURIComponent('王希昊-简历 202608.pdf') : 'Xihao%20Wang-Resume%202608.pdf');
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
     try { localStorage.setItem('lang', lang); } catch (e) {}
   }
