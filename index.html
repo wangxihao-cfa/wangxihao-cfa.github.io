@@ -1061,7 +1061,7 @@
       wk2_i1: "现金流预测模型", wk2_i2: "核心模拟引擎", wk2_i3: "独立建模的参数",
       wk2_c1: "PE 二级市场", wk2_c2: "基金权益估值", wk2_c3: "ESG 框架",
       wk2_cs_p1: "在私募市场，前瞻现金流决定估值——在 <b>二级市场</b> 它们决定价格。现成假设太粗糙，达不到业务所需的基金级 NAV 精度。",
-      wk2_cs_p2: "端到端负责公司 <b>现金流预测模型</b>：<b>蒙特卡洛引擎</b>，其中<b>每个参数独立建模</b>（量化与机器学习方法）——没有拍脑袋的输入。",
+      wk2_cs_p2: "端到端负责公司 <b>现金流预测模型</b>：以 <b>蒙特卡洛引擎</b> 为核心，<b>每个参数独立建模</b>（量化与机器学习方法），所有输入均基于数据与模型推导，杜绝主观臆断。",
       wk2_cs_p3: "全组合流动性、现金流预测，Python 估值模型（<b>ValueAlt</b>）、CECL 方法，以及覆盖全部私募资产的数据驱动 ESG 框架。",
       wk3_tag: "公开市场 · 组合风险分析", wk3_t: "五年深耕公开市场股权风险。",
       wk3_p: "在 Invesco 与多个投资团队的组合经理直接协作，并负责 <b>CIO 监督报告</b>——端到端运行经典公募基金分析工具集：业绩分析、贡献与归因、因子分析、风险报告。同时构建并自动化量化层：<b>止损策略</b>（简单与集成）在 Russell 与 MSCI 指数回测并自动生成每日报表，<b>机器学习模型</b> 分析持仓，<b>自动选股</b>——荣获 <b>2018 年 Principles at Work 奖</b>。",
@@ -1098,11 +1098,10 @@
       ? 'Resume/' + encodeURIComponent('王希昊-简历 202608.pdf')
       : 'Resume/Xihao%20Wang-Resume%202608.pdf';
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-    localStorage.setItem('lang', lang);
   }
 
   document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
-  applyLang(localStorage.getItem('lang') || 'en');
+  applyLang('en');
 
   // Nav border on scroll
   const nav = document.getElementById('nav');
